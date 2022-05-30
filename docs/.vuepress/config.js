@@ -30,7 +30,9 @@ module.exports = {
                 text: 'Java',
                 link: '/java/',
                 items: [
-                    { text: 'Java基础', link: '/java/basis/' },
+                    // { text: 'Java基础', link: '/java/basis/' },
+                    { text: '数据库', link: '/java/databases/' },
+                    { text: '日志框架', link: '/java/logs/' },
                 ],
             },
             // {
@@ -53,11 +55,65 @@ module.exports = {
                 text: '爱好',
                 link: '/about/hobbies/',
                 items: [
-                    { text: '读书', link: '/about/hobbies/reading/' },
+                    { text: '读书', link: '/about/hobbies/booklist/' },
                     { text: '电影', link: '/about/hobbies/films/' },
                 ],
             },
         ],
+        // 侧边栏
+        sidebar: {
+            '/about/hobbies/booklist/': [{
+                title: '读书清单',
+                collapsable: false, // 是否可以收起来
+                children: [
+                    {
+                        title: '2022年', path: '/about/hobbies/booklist/'
+                    }
+                ]
+            }],
+            '/java/databases/': [{
+                title: '数据库',
+                collapsable: false, // 是否可以收起来
+                children: [
+                    {
+                        title: 'ClickHouse', path: '/java/databases/ClickHouse.md'
+                    },
+                    {
+                        title: 'InfluxDB', path: '/java/databases/InfluxDB.md'
+                    }
+                ]
+            }],
+            '/java/logs/': [{
+                title: '日志框架',
+                collapsable: false, // 是否可以收起来
+                children: [
+                    {
+                        title: 'Loki', path: '/java/logs/Loki.md'
+                    }
+                ]
+            }]
+        },
+        // sidebar: [
+        //     {
+        //         title: '数据库',   // 必要的
+        //         path: '/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+        //         collapsable: false, // 可选的, 默认值是 true,
+        //         sidebarDepth: 2,    // 可选的, 默认值是 1
+        //         children: [
+        //             '/java/databases/ClickHouse.md',
+        //             '/java/databases/InfluxDB.md'
+        //         ]
+        //     },
+        //     {
+        //         title: '日志框架',   // 必要的
+        //         path: '/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+        //         collapsable: false, // 可选的, 默认值是 true,
+        //         sidebarDepth: 2,    // 可选的, 默认值是 1
+        //         children: [
+        //             '/java/logs/Loki.md'
+        //         ]
+        //     }
+        // ],
         // 侧边栏显示深度，默认1，最大2（显示到h3标题）
         sidebarDepth: 2,
         // 导航栏右侧生成Github链接
@@ -74,7 +130,8 @@ module.exports = {
     },
     // 插件配置
     plugins: [
-        [require('./plugins/love-me'), { // 鼠标点击爱心特效
+        // 鼠标点击爱心特效
+        [require('./plugins/love-me'), {
             color: '#F22222', // 爱心颜色，默认随机色
             excludeClassName: 'theme-vdoing-content' // 要排除元素的class, 默认空''
         }],
@@ -92,8 +149,6 @@ module.exports = {
         [
             'vuepress-plugin-zooming',
             {
-                // 排除class是no-zoom的图片
-                selector: '.theme-vdoing-content img:not(.no-zoom)',
                 options: {
                     bgColor: 'rgba(0,0,0,0.6)',
                 },
